@@ -8,10 +8,10 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["MVCDemo_Jenkins.csproj", "."]
-RUN dotnet restore "./MVCDemo_Jenkins.csproj"
+COPY ["MVCDemo_Jenkins/MVCDemo_Jenkins.csproj", "MVCDemo_Jenkins/"]
+RUN dotnet restore "./MVCDemo_Jenkins/MVCDemo_Jenkins.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/MVCDemo_Jenkins"
 RUN dotnet build "./MVCDemo_Jenkins.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
